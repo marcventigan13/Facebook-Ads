@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facebook Ads — [Client Name]</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root{
+  --fb-blue:#1877F2;
+  --fb-blue-dark:#166FE5;
+  --fb-bg:#F0F2F5;
+  --fb-white:#FFFFFF;
+  --fb-border:#CED0D4;
+  --fb-text:#050505;
+  --fb-meta:#65676B;
+  --fb-hover:#E7F3FF;
+  --fb-green:#42B72A;
+  --red:#C41E1E;
+  --light:#E8E5DF;
+}
+
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--fb-bg);padding:32px 20px;font-size:15px;}
+
+/* PAGE HEADER */
+.page-header{text-align:center;margin-bottom:40px;}
+.page-header h1{font-family:'Outfit',sans-serif;font-size:28px;font-weight:600;color:#050505;margin-bottom:6px;}
+.page-header p{font-size:14px;color:var(--fb-meta);}
+
+/* GRID */
+.ads-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:24px;max-width:1200px;margin:0 auto;}
+
+/* AD CARD */
+.ad-card{background:var(--fb-white);border-radius:8px;border:1px solid var(--fb-border);overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.1);}
+
+/* AD HEADER */
+.ad-header{padding:12px 16px;display:flex;align-items:center;gap:10px;}
+.ad-avatar{width:40px;height:40px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;color:#fff;flex-shrink:0;font-family:'Outfit',sans-serif;}
+.ad-page-info{flex:1;}
+.ad-page-name{font-size:14px;font-weight:600;color:var(--fb-text);line-height:1.3;}
+.ad-meta{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--fb-meta);}
+.ad-sponsored{color:var(--fb-meta);}
+.ad-globe{font-size:11px;}
+.ad-more{margin-left:auto;color:var(--fb-meta);font-size:20px;cursor:pointer;padding:0 4px;line-height:1;}
+
+/* VERSION BADGE */
+.version-badge{display:inline-flex;align-items:center;background:#E7F3FF;color:var(--fb-blue);font-size:11px;font-weight:500;padding:2px 10px;border-radius:12px;margin:0 16px 8px;}
+
+/* AD BODY TEXT */
+.ad-body{padding:0 16px 12px;}
+.ad-body-text{font-size:14px;color:var(--fb-text);line-height:1.65;white-space:pre-line;}
+.ad-body-text .see-more{color:var(--fb-blue);cursor:pointer;font-size:14px;}
+.ad-bullet{display:flex;align-items:flex-start;gap:6px;font-size:14px;color:var(--fb-text);margin:4px 0;line-height:1.5;}
+
+/* AD IMAGE PLACEHOLDER */
+.ad-image{width:100%;height:220px;background:#E4E6EB;display:flex;align-items:center;justify-content:center;color:var(--fb-meta);font-size:14px;font-weight:400;border-top:1px solid var(--fb-border);border-bottom:1px solid var(--fb-border);}
+
+/* AD LINK BLOCK */
+.ad-link-block{background:#F0F2F5;border-top:1px solid var(--fb-border);}
+.ad-link-inner{padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.ad-link-text{flex:1;}
+.ad-link-domain{font-size:12px;color:var(--fb-meta);text-transform:uppercase;margin-bottom:2px;}
+.ad-link-headline{font-size:14px;font-weight:600;color:var(--fb-text);line-height:1.3;margin-bottom:2px;}
+.ad-link-desc{font-size:13px;color:var(--fb-meta);line-height:1.3;}
+.ad-cta-btn{background:var(--fb-blue);color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}
+.ad-cta-btn:hover{background:var(--fb-blue-dark);}
+
+/* REACTIONS BAR */
+.ad-reactions{padding:8px 16px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--fb-border);}
+.reaction-count{font-size:14px;color:var(--fb-meta);display:flex;align-items:center;gap:4px;}
+.reaction-emojis{font-size:14px;}
+.ad-actions{display:flex;gap:0;}
+.ad-action{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:4px;font-size:14px;font-weight:600;color:var(--fb-meta);cursor:pointer;}
+.ad-action:hover{background:var(--fb-hover);}
+
+/* HEADLINES SECTION */
+.headlines-section{background:#F7F8FA;border-top:1px solid var(--fb-border);padding:12px 16px;}
+.headlines-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--fb-meta);margin-bottom:8px;}
+.headline-list{display:flex;flex-direction:column;gap:6px;}
+.headline-item{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--fb-text);padding:7px 10px;background:var(--fb-white);border:1px solid var(--fb-border);border-radius:4px;}
+.headline-num{font-size:11px;font-weight:600;color:var(--fb-meta);min-width:16px;margin-top:1px;}
+
+@media(max-width:600px){
+  .ads-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Facebook Ad Campaign</h1>
+  <p>5 Awareness Levels &nbsp;·&nbsp; Free Consultation Offer &nbsp;·&nbsp; [Client Name]</p>
+</div>
+
+<div class="ads-grid">
+
+  <!-- AD 1: UNAWARE -->
+  <div class="ad-card">
+    <div class="ad-header">
+      <div class="ad-avatar">C</div>
+      <div class="ad-page-info">
+        <div class="ad-page-name">[Client Name]</div>
+        <div class="ad-meta"><span class="ad-sponsored">Sponsored</span> <span class="ad-globe">🌐</span></div>
+      </div>
+      <div class="ad-more">···</div>
+    </div>
+    <div class="version-badge">Version 1 — Unaware</div>
+    <div class="ad-body">
+      <div class="ad-body-text">Living healthier doesn't need to feel like punishing yourself.
+
+You don't need to force yourself to the gym every day, especially when you have other priorities like ensuring your career goes smoothly.
+
+Working out as little as 3 times a week is enough to improve your health.
+
+You only need to do these 3 things:</div>
+      <div style="margin:8px 0;">
+        <div class="ad-bullet">🏋️‍♀️ <span><strong>Resistance training</strong> – building functional strength</span></div>
+        <div class="ad-bullet">🍎 <span><strong>Eating healthy</strong> – knowing what food to eat</span></div>
+        <div class="ad-bullet">🏆 <span><strong>Accountability</strong> – ensuring you show up</span></div>
+      </div>
+      <div class="ad-body-text">[Client Name] can help you build these 3 foundations for free.
+
+When you're healthy, you can keep up with life's demands. There'll be fewer excuses to do the work… or you'll have the energy to have fun with family or friends.
+
+If you want to learn more…
+
+Book your FREE CONSULTATION today. 👇</div>
+    </div>
+    <div class="ad-image">[Ad Creative — Busy Professional Image]</div>
+    <div class="ad-link-block">
+      <div class="ad-link-inner">
+        <div class="ad-link-text">
+          <div class="ad-link-domain">[clientname].com</div>
+          <div class="ad-link-headline">Living Healthy Shouldn't Feel Like Punishment</div>
+          <div class="ad-link-desc">Book your free consultation today</div>
+        </div>
+        <button class="ad-cta-btn">Book Now</button>
+      </div>
+    </div>
+    <div class="ad-reactions">
+      <div class="reaction-count"><span class="reaction-emojis">👍❤️</span> 142</div>
+      <div class="ad-actions">
+        <div class="ad-action">👍 Like</div>
+        <div class="ad-action">💬 Comment</div>
+        <div class="ad-action">↗ Share</div>
+      </div>
+    </div>
+    <div class="headlines-section">
+      <div class="headlines-label">Headline Variations</div>
+      <div class="headline-list">
+        <div class="headline-item"><span class="headline-num">H1</span>Living Healthy Shouldn't Feel Like Punishment</div>
+        <div class="headline-item"><span class="headline-num">H2</span>Working Out 3x a Week to Live Healthy</div>
+        <div class="headline-item"><span class="headline-num">H3</span>Claim Your FREE Expert Consultation Today!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD 2: PROBLEM AWARE -->
+  <div class="ad-card">
+    <div class="ad-header">
+      <div class="ad-avatar">C</div>
+      <div class="ad-page-info">
+        <div class="ad-page-name">[Client Name]</div>
+        <div class="ad-meta"><span class="ad-sponsored">Sponsored</span> <span class="ad-globe">🌐</span></div>
+      </div>
+      <div class="ad-more">···</div>
+    </div>
+    <div class="version-badge">Version 2 — Problem Aware</div>
+    <div class="ad-body">
+      <div class="ad-body-text">A good health plan doesn't feel like a chore.
+
+It's something that integrates into your busy schedule.
+
+Your tiring day shouldn't turn into an exhausting one. Rather, your health plan is something that's supposed to help you get more energy to fulfill your daily activities.
+
+Spending hours in the gym isn't realistic when you've got tons of responsibilities in your career and home.
+
+Luckily, all you need is 30 minutes per workout to get the results you need.
+
+[Client Name] has helped countless busy professionals like you achieve a healthy lifestyle. They've learned how to give their body what it needs…
+
+As a result, their body can keep up with life's demands.
+
+Want to know if we can help you too?
+
+Schedule your FREE consultation today 👇</div>
+    </div>
+    <div class="ad-image">[Ad Creative — 30-Minute Workout Visual]</div>
+    <div class="ad-link-block">
+      <div class="ad-link-inner">
+        <div class="ad-link-text">
+          <div class="ad-link-domain">[clientname].com</div>
+          <div class="ad-link-headline">Living Healthy Shouldn't Feel Like a Chore</div>
+          <div class="ad-link-desc">Schedule your free consultation today</div>
+        </div>
+        <button class="ad-cta-btn">Book Now</button>
+      </div>
+    </div>
+    <div class="ad-reactions">
+      <div class="reaction-count"><span class="reaction-emojis">👍❤️</span> 98</div>
+      <div class="ad-actions">
+        <div class="ad-action">👍 Like</div>
+        <div class="ad-action">💬 Comment</div>
+        <div class="ad-action">↗ Share</div>
+      </div>
+    </div>
+    <div class="headlines-section">
+      <div class="headlines-label">Headline Variations</div>
+      <div class="headline-list">
+        <div class="headline-item"><span class="headline-num">H1</span>Living Healthy Shouldn't Feel Like a Chore</div>
+        <div class="headline-item"><span class="headline-num">H2</span>Free Consultation With Fitness Experts</div>
+        <div class="headline-item"><span class="headline-num">H3</span>Learn How to Craft Effective 30-Minute Workouts</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD 3: SOLUTION AWARE -->
+  <div class="ad-card">
+    <div class="ad-header">
+      <div class="ad-avatar">C</div>
+      <div class="ad-page-info">
+        <div class="ad-page-name">[Client Name]</div>
+        <div class="ad-meta"><span class="ad-sponsored">Sponsored</span> <span class="ad-globe">🌐</span></div>
+      </div>
+      <div class="ad-more">···</div>
+    </div>
+    <div class="version-badge">Version 3 — Solution Aware</div>
+    <div class="ad-body">
+      <div class="ad-body-text">You can achieve a healthy lifestyle even with a busy career.
+
+It's about making a health plan that suits your schedule.
+
+Even just a quick 30-minute workout can get your life moving toward a healthier you.
+
+[Client Name] has helped hundreds of busy professionals like you create a fulfilling life.
+
+Schedule your FREE consultation today. 👇</div>
+    </div>
+    <div class="ad-image">[Ad Creative — Professional Energy Visual]</div>
+    <div class="ad-link-block">
+      <div class="ad-link-inner">
+        <div class="ad-link-text">
+          <div class="ad-link-domain">[clientname].com</div>
+          <div class="ad-link-headline">Meet Your Career's Demands by Living Healthier</div>
+          <div class="ad-link-desc">Claim your free consultation with fitness experts</div>
+        </div>
+        <button class="ad-cta-btn">Book Now</button>
+      </div>
+    </div>
+    <div class="ad-reactions">
+      <div class="reaction-count"><span class="reaction-emojis">👍❤️</span> 74</div>
+      <div class="ad-actions">
+        <div class="ad-action">👍 Like</div>
+        <div class="ad-action">💬 Comment</div>
+        <div class="ad-action">↗ Share</div>
+      </div>
+    </div>
+    <div class="headlines-section">
+      <div class="headlines-label">Headline Variations</div>
+      <div class="headline-list">
+        <div class="headline-item"><span class="headline-num">H1</span>Meet Your Career's Demands by Living Healthier</div>
+        <div class="headline-item"><span class="headline-num">H2</span>Become One of the Hundreds We've Helped</div>
+        <div class="headline-item"><span class="headline-num">H3</span>Claim Your Free Consultation With Fitness Experts!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD 4: PRODUCT AWARE -->
+  <div class="ad-card">
+    <div class="ad-header">
+      <div class="ad-avatar">C</div>
+      <div class="ad-page-info">
+        <div class="ad-page-name">[Client Name]</div>
+        <div class="ad-meta"><span class="ad-sponsored">Sponsored</span> <span class="ad-globe">🌐</span></div>
+      </div>
+      <div class="ad-more">···</div>
+    </div>
+    <div class="version-badge">Version 4 — Product Aware</div>
+    <div class="ad-body">
+      <div class="ad-body-text">We've helped hundreds of busy professionals claim their life back.
+
+When you're healthy you can live life to the fullest.</div>
+      <div style="margin:8px 0;">
+        <div class="ad-bullet">💯 <span>You'll always maintain your 100% at work.</span></div>
+        <div class="ad-bullet">❤️ <span>There's no sickness making you miss family moments.</span></div>
+        <div class="ad-bullet">🥳 <span>And you'll always move your body the way you want it.</span></div>
+      </div>
+      <div class="ad-body-text">At [Client Name] it's our goal to help you live healthier.
+
+Schedule your FREE consultation with us TODAY! 👇</div>
+    </div>
+    <div class="ad-image">[Ad Creative — Happy Active Professional]</div>
+    <div class="ad-link-block">
+      <div class="ad-link-inner">
+        <div class="ad-link-text">
+          <div class="ad-link-domain">[clientname].com</div>
+          <div class="ad-link-headline">When You're Healthy, You Can Be There</div>
+          <div class="ad-link-desc">Free health plan consulted with fitness experts</div>
+        </div>
+        <button class="ad-cta-btn">Book Now</button>
+      </div>
+    </div>
+    <div class="ad-reactions">
+      <div class="reaction-count"><span class="reaction-emojis">👍❤️</span> 203</div>
+      <div class="ad-actions">
+        <div class="ad-action">👍 Like</div>
+        <div class="ad-action">💬 Comment</div>
+        <div class="ad-action">↗ Share</div>
+      </div>
+    </div>
+    <div class="headlines-section">
+      <div class="headlines-label">Headline Variations</div>
+      <div class="headline-list">
+        <div class="headline-item"><span class="headline-num">H1</span>When You're Healthy, You Can Be There</div>
+        <div class="headline-item"><span class="headline-num">H2</span>Live Healthier Even With a Busy Career</div>
+        <div class="headline-item"><span class="headline-num">H3</span>Free Health Plan Consulted With Fitness Experts</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD 5: MOST AWARE -->
+  <div class="ad-card">
+    <div class="ad-header">
+      <div class="ad-avatar">C</div>
+      <div class="ad-page-info">
+        <div class="ad-page-name">[Client Name]</div>
+        <div class="ad-meta"><span class="ad-sponsored">Sponsored</span> <span class="ad-globe">🌐</span></div>
+      </div>
+      <div class="ad-more">···</div>
+    </div>
+    <div class="version-badge">Version 5 — Most Aware</div>
+    <div class="ad-body">
+      <div class="ad-body-text">We believe everybody has the right to live healthy.
+
+Your health plan should fit into your life — it's not the other way around.
+
+[Client Name] is committed to ensure you get the most of life because your body can meet life's demands.
+
+Schedule your FREE consultation with us TODAY! 👇</div>
+    </div>
+    <div class="ad-image">[Ad Creative — Brand / Lifestyle Visual]</div>
+    <div class="ad-link-block">
+      <div class="ad-link-inner">
+        <div class="ad-link-text">
+          <div class="ad-link-domain">[clientname].com</div>
+          <div class="ad-link-headline">You Have the Right to Be Healthy</div>
+          <div class="ad-link-desc">Build a health plan with fitness experts</div>
+        </div>
+        <button class="ad-cta-btn">Book Now</button>
+      </div>
+    </div>
+    <div class="ad-reactions">
+      <div class="reaction-count"><span class="reaction-emojis">👍❤️</span> 56</div>
+      <div class="ad-actions">
+        <div class="ad-action">👍 Like</div>
+        <div class="ad-action">💬 Comment</div>
+        <div class="ad-action">↗ Share</div>
+      </div>
+    </div>
+    <div class="headlines-section">
+      <div class="headlines-label">Headline Variations</div>
+      <div class="headline-list">
+        <div class="headline-item"><span class="headline-num">H1</span>You Have the Right to Be Healthy</div>
+        <div class="headline-item"><span class="headline-num">H2</span>Your Health Plan Should Follow Your Schedule</div>
+        <div class="headline-item"><span class="headline-num">H3</span>Build a Health Plan With Fitness Experts</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
